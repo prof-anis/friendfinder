@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request)
     {
-       $user = User::create($request->validated());
+       User::create($request->validated());
 
        return redirect()->route('index')->with([
            'status' => 'Registration successful.'

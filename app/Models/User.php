@@ -6,6 +6,7 @@ use App\Casts\ImageCast;
 use App\Casts\PasswordCast;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -50,4 +51,28 @@ class User extends Authenticatable
         'image' => ImageCast::class
     ];
 
+    public function post(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function followers(): HasMany
+    {
+        return $this->hasMany(UserFollower::class, 'user', 'id');
+    }
+
+    public function following(): HasMany
+    {
+        return $this->hasMany(UserFollower::class, 'following', 'id');
+    }
+
+    public function isFollowing(User $user)
+    {
+        $this->following->where('user', $user->id)->first() != null;
+    }
+
+    public function isBeingFollowed(User $user)
+    {
+        $this->followers()->where('following', $user->id)->exists();
+    }
 }

@@ -29,5 +29,12 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'apple' => [
+        'client_id' => "com.app.amatnow", //env('APPLE_CLIENT_ID'),
+        'client_secret' => env('APPLE_CLIENT_SECRET'),
+        'team_id' => "DTG67AR9Q4", //env('APPLE_TEAM_ID'),
+        'key_id' => "3TVFN65TZ8",//env('APPLE_KEY_ID'),
+        'private_key' => file_get_contents(base_path("customer.p8"))
+    ],
 
 ];
