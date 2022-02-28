@@ -51,20 +51,40 @@
                                     <h5><a href="#" class="profile-link">{{ "@".$user->username }}</a></h5>
                                     <p>Software Engineer</p>
                                  </div>
-                                @if (!auth()->user()->isFollowing($user))
+                                <!-- @if (!auth()->user()->isFollowing($user))
                                     <form style="display: inline" method="POST" action="{{ route('follow', $user) }}">
                                         @csrf
                                         <div class="col-md-3 col-sm-3">
                                             <button class="btn btn-primary pull-right">Add Friend</button>
                                         </div>
                                     </form>
+                                @endif -->
+
+                                @if (!auth()->user()->isFollowing($user))
+                                <form style="display: inline" method="POST" action="{{ route('follow', $user) }}">
+                                        @csrf
+                                        <div class="col-md-3 col-sm-3">
+                                            <button class="btn btn-primary pull-right">Add Friend</button>
+                                        </div>
+                                    </form>
+                                @else
+                                <form style="display: inline" method="POST" action="{{ route('unfollow', $user) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="col-md-3 col-sm-3">
+                                            <button class="btn btn-danger pull-right">UnFollow</button>
+                                        </div>
+                                    </form> 
                                 @endif
+                             
                             </div>
                         </div>
                         @endforeach
                     </div>
                 </div>
-
+                <div class="container mt-3 mb-3">
+                    {{ $users->links() }}
+                </div>
                 <!-- Newsfeed Common Side Bar Right
                  ================================================= -->
                 <div class="col-md-2 static">
@@ -110,5 +130,5 @@
             </div>
         </div>
     </div>
-
+   
 @endsection
