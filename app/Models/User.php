@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         $this->followers()->where('following', $user->id)->exists();
     }
+
+    public function isEmailValid ($email)
+    {
+       return User::where('email', $email)->exists();
+    }
 }

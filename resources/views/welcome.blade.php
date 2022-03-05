@@ -213,7 +213,7 @@
                                 </div>
                                 <button class="btn btn-primary">Login Now</button>
                             </form><!--Login Form Ends-->
-                            <p><a href="#">Forgot Password?</a></p>
+                            <p><a href="{{ route('forgetpassword') }}">Forgot Password?</a></p>
                         </div>
                     </div>
                 </div>

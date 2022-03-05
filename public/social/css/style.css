@@ -2361,3 +2361,12 @@ ul.contact li i{
 }
 
 
+.logout{
+  border:none; background-color:#231F20; color:white; font-size: 13px;
+  font-weight: 600;
+  margin:2px 5px;
+}
+.logout:hover{
+  color:#27aae1;
+}
+

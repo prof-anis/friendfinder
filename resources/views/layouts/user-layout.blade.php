@@ -27,6 +27,7 @@
 
 <!-- Header
 ================================================= -->
+
 <header id="header">
     <nav class="navbar navbar-default navbar-fixed-top menu">
         <div class="container">
@@ -97,6 +98,12 @@
                         </ul>
                     </li>
                     <li class="dropdown"><a href="contact.html">Contact</a></li>
+                    <li class="dropdown">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="logout"> Logout </button>
+                        </form>
+                    </li>
                 </ul>
                 <form class="navbar-form navbar-right hidden-sm">
                     <div class="form-group">
@@ -119,6 +126,10 @@
             <!-- Page content goes here -->
             @yield("content")
 
+
+            <!-- forgetpassword  -->
+            @yield("forgetpassword")
+            @yield("resetpassword")
         </div>
     </div>
 </div>
