@@ -51,7 +51,12 @@ class User extends Authenticatable
         'image' => ImageCast::class
     ];
 
-    public function post(): HasMany
+    public function getFullNameAttribute()
+    {
+        return $this->first_name." ".$this->last_name;
+    }
+
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
@@ -74,10 +79,5 @@ class User extends Authenticatable
     public function isBeingFollowed(User $user)
     {
         $this->followers()->where('following', $user->id)->exists();
-    }
-
-    public function isEmailValid ($email)
-    {
-       return User::where('email', $email)->exists();
     }
 }

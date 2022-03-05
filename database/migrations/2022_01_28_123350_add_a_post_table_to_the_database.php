@@ -16,9 +16,7 @@ class AddAPostTableToTheDatabase extends Migration
        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->text('body');
-            $table->string('title');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->json('images')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
        });
     }

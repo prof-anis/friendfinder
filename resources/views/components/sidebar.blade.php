@@ -2,8 +2,8 @@
     <div class="profile-card">
         <img src="{{ auth()->user()->image }}" alt="user" class="profile-photo" />
         <h5><a href="timeline.html" class="text-white">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</a></h5>
-        <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
-        <a style="padding-left:20px;" href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ auth()->user()->following->count() }} following</a>
+        <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ auth()->user()->followers()->count() }} followers</a>
+        <a style="padding-left:20px;" href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ auth()->user()->following()->count() }} following</a>
     </div><!--profile card ends-->
     <ul class="nav-news-feed">
         <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>

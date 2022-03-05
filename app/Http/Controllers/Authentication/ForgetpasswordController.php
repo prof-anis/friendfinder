@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 class ForgetpasswordController extends Controller
-{   
-    protected $email;
+{
     public function __construct()
     {
-        $this->email = new User;
     }
 
    public function index ()
@@ -19,15 +17,9 @@ class ForgetpasswordController extends Controller
        return view('auth.forgot-password');
    }
 
-   public function check(ForgetPasswordRequest $request){
-
-    $email = $request->input('email');
-    if(!$this->email->isEmailValid($email)){
-        return back()->with(['wrongemail' => 'invalid email address']);
-    }
+   public function check(ForgetPasswordRequest $request)
+   {
        return redirect()->route('mail');
-
-    
    }
 }
 
