@@ -24,4 +24,5 @@ class Comments extends Model
        return $this->belongTo(Post::class, 'post_id');
    }
 
+  
 }

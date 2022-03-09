@@ -3,7 +3,7 @@
 
 Click the button to reset your password 
 
-@component('mail::button', ['url' => 'localhost:8000/auth/resetpassword'])
+@component('mail::button', ['url' =>  route('resetpassword', $data) ])
 Reset Password
 @endcomponent
 

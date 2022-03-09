@@ -34,7 +34,7 @@
         ================================================= -->
         @foreach ($relevantPosts as $post)
             <div class="post-content">
-              <!--  <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" /> -->
+           
                 <div class="post-container">
                     <img src="{{ $post->user->image }}" alt="user" class="profile-photo-md pull-left" />
                     <div class="post-detail">
@@ -60,7 +60,7 @@
                             <p><a href="timeline.html" class="profile-link">{{ $comment }} </a><i class="em em-laughing"></i> {{ $comment->body }} </p>
 </div>
                             @if ($comment->user_id == auth()->user()->id ||  $post->user_id == auth()->user()->id)
-                            <form action="{{route('Comment.delete', $comment->id) }}" method="post">
+                            <form action="{{route('comment.delete', $comment->id) }}" method="post">
                                 @csrf 
                                 <button type="submit" class="text-danger" style="margin:0px 20px; border:none; background-color:rgba(0,0,0,0); " > Delete</button>
                             </form>

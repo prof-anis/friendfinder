@@ -28,9 +28,9 @@ Route::group(['prefix' => 'auth'], function () {
    Route::post('register', RegisterController::class)->name('register');
    Route::post('login', LoginController::class)->name('login');
    Route::get('forgotpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
-   Route::Post('forgotpassword', [ForgetPasswordController::class, 'check'])->name('forgetpasswordCheck');
-   route::get('/resetpassword', [ResetPasswordController::class, 'index'])->name('ResetPassword');
-   route::PUT('/resetpassword', [ResetPasswordController::class, 'reset'])->name('Reset');
+   Route::post('forgotpassword', [ForgetPasswordController::class, 'check'])->name('forgetpasswordcheck');
+   Route::get('/resetpassword/ {data}', [ResetPasswordController::class, 'index'])->name('resetpassword');
+   route::put('/resetpassword/{data}', [ResetPasswordController::class, 'reset'])->name('reset');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('unfollow');
     Route::post('logout', LogoutController::class)->name('logout');
     Route::post('{id}/comments', [CommentController::class, 'store'])->name('comment.store');
-    Route::post('{id}/delete', [CommentController::class, 'destroy'])->name('Comment.delete');
+    Route::post('{id}/delete', [CommentController::class, 'destroy'])->name('comment.delete');
 });
 
 

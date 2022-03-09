@@ -13,9 +13,10 @@
                   <p>You can reset your password here.</p>
                   <div class="panel-body">
     
-                    <form id="register-form" class="form" method="post" action="{{ route('forgetpasswordCheck') }}">
+                    <form id="register-form" class="form" method="post" action="{{ route('forgetpasswordcheck') }}">
                     @csrf
                     <x-wrongemail></x-wrongemail>
+                    <x-success></x-success>
                       <div class="form-group">
                         <div class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
