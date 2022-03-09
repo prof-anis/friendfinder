@@ -48,23 +48,37 @@
                         </div>
                         <div class="line-divider"></div>
                         <div class="post-text">
-                            <p>
+                            <p>  {{ $post }}
                                 {{ $post->body }}
                             </p>
                         </div>
                         <div class="line-divider"></div>
-                      <!--  <div class="post-comment">
-                            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                        </div>
+                    
+                     @foreach ($post->comments as $comment )
+                         
                         <div class="post-comment">
-                            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                            <img src="" alt="" class="profile-photo-sm" />
+                            <p><a href="timeline.html" class="profile-link">{{ $comment }} </a><i class="em em-laughing"></i> {{ $comment->body }} </p>
+                           
+                            @if ($comment->user_id == auth()->user()->id ||  $post->user_id == auth()->user()->id)
+                            <form action="{{route('Comment.delete', $comment->id) }}" method="post">
+                                @csrf 
+                                <button type="submit" class="text-danger" style="margin:0px 20px; border:none; background-color:rgba(0,0,0,0); " > Delete</button>
+                            </form>
+                            @endif
+                          
                         </div>
+                         @endforeach
+
+                       
+                        <form action="{{route('comment.store', $post->id )}}" method="post">
+                            @csrf
+                            <x-error field="comment"></x-error>
                         <div class="post-comment">
-                            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                            <input type="text" class="form-control" placeholder="Post a comment">
-                        </div> -->
+                            <input type="text" class="form-control" name="comment" placeholder="Post a comment">
+                            <input id="Post" class="btn btn-primary" type="submit" value="Send">
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\UserFollowerController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\Post\CommentController;
 use App\Mail\ForgetPassMail;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', DashboardController::class)
-        ->name('dashboard');
+    Route::get('Dashboard', DashboardController::class)->name('dashboard');
     Route::get('people', [UserFollowerController::class, 'index'])
         ->name('people');
     Route::post('{user}/follow', [UserFollowerController::class, 'follow'])
@@ -42,9 +42,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('{user}/unfollow', [UserFollowerController::class, 'unfollow'])
         ->name('unfollow');
     Route::post('logout', LogoutController::class)->name('logout');
+    Route::post('{id}/comments', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('{id}/delete', [CommentController::class, 'destroy'])->name('Comment.delete');
 });
 
-Route::get('/mail', function () {
-    return new ForgetPassMail;
-})->name('mail');
+
 

@@ -19,4 +19,9 @@ class Post extends Model
     {
         return $builder->whereIn('user_id', $user->following()->pluck('user'));
     }
+
+    public function Comments ()
+    {
+        return $this->hasMany(Comments::class);
+    }
 }
