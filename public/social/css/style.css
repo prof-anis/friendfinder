@@ -2370,3 +2370,8 @@ ul.contact li i{
   color:#27aae1;
 }
 
+#Post {
+  border-radius: 1px;
+  padding:1px 20px ;
+  margin: 0px 10px;
+} 
