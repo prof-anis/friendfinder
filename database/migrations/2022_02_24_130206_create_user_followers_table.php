@@ -18,7 +18,6 @@ class CreateUserFollowersTable extends Migration
             $table->foreignId('following')->comment('This is the person following a user');
             $table->foreignId('user')->comment("This is the person being followed");
             $table->timestamps();
-            
         });
     }
 
