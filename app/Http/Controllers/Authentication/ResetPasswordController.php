@@ -17,7 +17,7 @@ class ResetPasswordController extends Controller
     }
 
     public function Reset(ResetPasswordRequest $request)
-    {
+    {     $email = $request->input('email');
         User::where('email', $email)->update([
             'password' => Hash::make($request->input('password'))
         ]);
