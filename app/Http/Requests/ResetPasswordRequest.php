@@ -26,7 +26,7 @@ class ResetPasswordRequest extends FormRequest
         return [
             'email' => ['required'],
             'password' => ['required', 'confirmed'],
-            'password_confirmation' => ['required', Rule::exits('users', 'email')]
+            'password_confirmation' => ['required']
         ];
     }
 }
