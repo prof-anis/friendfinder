@@ -14,9 +14,11 @@ class DashboardController extends Controller
     public function __invoke()
     {
         return view('user.dashboard', [
-            'relevantPosts' => Post::relevantToUser(Auth::user())->with('comments')->paginate(),
+            'relevantPosts' => Post::relevantToUser(Auth::user())->with('comments.user')->paginate(),
             'whoToFollower' => User::whereNotIn('id', Auth::user()->following()->pluck('user'))
                 ->withCount('posts')->orderBy('posts_count', 'DESC')->limit(7)->get()
         ]);
     }
+
+  
 }

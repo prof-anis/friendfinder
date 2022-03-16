@@ -5,6 +5,7 @@ use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\Authentication\ForgetpasswordController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\UserFollowerController;
 use App\Http\Controllers\Post\CommentController;
 use App\Http\Controllers\LogoutController;
@@ -36,6 +37,8 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', DashboardController::class)
         ->name('dashboard');
+        Route::get('data', [DataController::class, 'data'])
+        ->name('data');
     Route::get('people', [UserFollowerController::class, 'index'])
         ->name('people');
     Route::post('{user}/follow', [UserFollowerController::class, 'follow'])
