@@ -30,14 +30,14 @@ Route::group(['prefix' => 'auth'], function () {
    Route::post('login', LoginController::class)->name('login');
    Route::get('forgotpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
    Route::post('forgotpassword', [ForgetPasswordController::class, 'check'])->name('forgetpasswordcheck');
-   Route::get('/resetpassword/ {data}', [ResetPasswordController::class, 'index'])->name('resetpassword');
+   Route::get('/resetpassword/{data}', [ResetPasswordController::class, 'index'])->name('resetpassword');
    route::put('/resetpassword/{data}', [ResetPasswordController::class, 'reset'])->name('reset');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', DashboardController::class)
+    Route::get('/{username}', DashboardController::class)
         ->name('dashboard');
-        Route::get('data', [DataController::class, 'data'])
+        Route::get('users/post', [ DataController::class , 'index'])
         ->name('data');
     Route::get('people', [UserFollowerController::class, 'index'])
         ->name('people');
@@ -51,4 +51,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+  
 

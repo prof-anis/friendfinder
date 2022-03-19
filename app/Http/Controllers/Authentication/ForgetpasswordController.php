@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authentication;
 use App\Http\Requests\Auth\ForgetPasswordRequest;
 use Illuminate\Support\Facades\Mail;
 use  App\Mail\Forgetpasswordmail;
+use  App\jobs\ResetPasswordJob;
 use App\Http\Controllers\Controller;
 use App\Models\ResetPassword;
 use Illuminate\Http\Request;
@@ -23,13 +24,13 @@ class ForgetpasswordController extends Controller
 
    public function check(ForgetPasswordRequest $request)
    {  
-     $reset_token = Str::random(60);
-      ResetPassword::create([
+     
+     $ResetRecord = ResetPassword::create([
         'email' => $request->email,
-        'reset_token' => $reset_token
+        'reset_token' => Str::random(60)
       ]);
-      
-      Mail::to($request->input('email'))->send(new Forgetpasswordmail($reset_token) );
+
+      ResetPasswordJob::dispatch($ResetRecord)->delay(now()->addMinutes(1));
        return back()->with('status', 'A message has been sent to your email');
 
   }

@@ -1,9 +1,11 @@
 @extends('layouts.user-layout')
 
 @section("content")
-
+<!-- @if (Request::path() !== auth()->user()->username)
+      @dd(404);
+     @endif -->
     <x-sidebar></x-sidebar>
-
+           
     <div class="col-md-7">
 
         <!-- Post Create Box
@@ -79,7 +81,9 @@
                 </div>
             </div>
         @endforeach
+    <div>
 
+    </div>
 
 
     </div>
@@ -138,22 +142,55 @@
                             <script>
 
                             $(document).ready(function () {
-                                    fetchdata();
+                             fetchdata();
+                             
                                 function fetchdata () {
-                                   
-                                    $.ajax({
-                                        type:'get',
-                                        url:"{{ route('data') }}",
-                                        datatype:'json',
-                                        success:function (response) {
-                                                console.log(response);
-                                                console.log('emeka')
-                                        }
-                                    });
-                                }
-                                $(document).on('click', function (e){
-                                    
-                                })
-                            })
+                                   $.ajax({
+                                      type: 'get',
+                                      url:"{{route('data')}}",
+                                      datatype: "Json",
+                                      success:function (response) {
+                                        console.log(response.post);
+                                        $.each(response.post, function (key,  items){
+                                            $('<div>').append('div\
+                                            <div class="post-content">\
+                                                <div class="post-container">\
+                                                <img src="" alt="user" class="profile-photo-md pull-left" />\
+                                                <div class="post-detail">\
+                                                    <div class="user-info">\
+                                                        <h5><a href="timeline.html" class="profile-link"></a> <span class="following">following</span></h5>\
+                                                        <p class="text-muted">Published  </p>\
+                                                    </div>\
+                                                    <div class="reaction">\
+                                                        <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>\
+                                                        <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>\
+                                                    </div>\
+                                                    <div class="line-divider"></div>\
+                                                    <div class="post-text">\
+                                                        <p> </p>\
+                                                    </div>\
+                                                    <div class="line-divider"></div>\
+                                                    <div class="post-comment">\
+                                                        <img src="{{ $comment->user->image }}" alt="" class="profile-photo-sm" />\
+                                                        <p><a href="timeline.html" class="profile-link">{{ $comment->user->username }} </a><i class="em em-laughing"></i> {{ $comment->body }} </p>\
+                                                        </div>\
+                                                        <form action="" method="post">\ 
+                                                            <button type="submit" class="text-danger" style="margin:0px 20px; border:none; background-color:rgba(0,0,0,0); " > Delete</button>\
+                                                        </form>\
+                                                    <form action="  " method="POST">\
+                                                        <x-error field="comment"></x-error>\
+                                                        <input type="text"  id="comment"class="form-control comment" name="comment" placeholder="Post a comment">\
+                                                        <input id="Post" class="btn btn-primary " type="submit" value="Send">\
+                                                        </form>\
+                                                </div>\
+                                            </div>\
+                                        </div>'
+                                        );
+                                        })
+                                      }
+                                   });
+                                    };
+                                
+                            });
                             </script>
         @endsection

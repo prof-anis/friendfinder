@@ -14,7 +14,8 @@ class LoginController extends Controller
         if (!Auth::guard('web')->attempt($request->validated())) {
            return back()->with(['status' => 'Sorry, invalid username or password.']);
         }
-
-        return redirect()->route('dashboard');
+            
+          return redirect('/'.auth()->user()->username);
     }
 }
+ 
