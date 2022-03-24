@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function User()
     {
         return $this->belongsTo(User::class);
     }
@@ -18,5 +18,9 @@ class Post extends Model
     public function scopeRelevantToUser(Builder $builder, User $user)
     {
         return $builder->whereIn('user_id', $user->following()->pluck('user'));
+    }
+    public function Comments ()
+    {
+        return $this->hasMany(Comments::class);
     }
 }

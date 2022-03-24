@@ -14,7 +14,7 @@
                   <x-success></x-success>
                   <x-wrongemail></x-wrongemail>
                   <div class="panel-body">
-                <form method="post" action="{{route('Reset')}}">
+                <form method="post" action="{{route('reset', $data )}}">
                     @csrf
                     @method('PUT')
                  <div class="mb-3">

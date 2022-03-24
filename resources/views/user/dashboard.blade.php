@@ -1,9 +1,11 @@
 @extends('layouts.user-layout')
 
 @section("content")
-
+<!-- @if (Request::path() !== auth()->user()->username)
+      @dd(404);
+     @endif -->
     <x-sidebar></x-sidebar>
-
+           
     <div class="col-md-7">
 
         <!-- Post Create Box
@@ -12,7 +14,7 @@
             <div class="row">
                 <div class="col-md-7 col-sm-7">
                     <div class="form-group">
-                        <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
+                        <img src="" alt="" class="profile-photo-md" />
                         <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
                     </div>
                 </div>
@@ -34,7 +36,6 @@
         ================================================= -->
         @foreach ($relevantPosts as $post)
             <div class="post-content">
-              <!--  <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" /> -->
                 <div class="post-container">
                     <img src="{{ $post->user->image }}" alt="user" class="profile-photo-md pull-left" />
                     <div class="post-detail">
@@ -53,23 +54,36 @@
                             </p>
                         </div>
                         <div class="line-divider"></div>
-                      <!--  <div class="post-comment">
-                            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                        </div>
+                        @foreach ($post->comments as $comment )
+
                         <div class="post-comment">
-                            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                        </div>
-                        <div class="post-comment">
-                            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                            <input type="text" class="form-control" placeholder="Post a comment">
-                        </div> -->
+                            <img src="{{ $comment->user->image }}" alt="" class="profile-photo-sm" />
+                            <p><a href="timeline.html" class="profile-link">{{ $comment->user->username }} </a><i class="em em-laughing"></i> {{ $comment->body }} </p>
+                            </div>
+                            @if ($comment->user_id == auth()->user()->id ||  $post->user_id == auth()->user()->id)
+                            <form action="{{route('comment.delete', $comment->id) }}" method="post">
+                                @csrf 
+                                <button type="submit" class="text-danger" style="margin:0px 20px; border:none; background-color:rgba(0,0,0,0); " > Delete</button>
+                            </form>
+                            @endif
+                            @endforeach
+
+
+                        <form action="{{ route('comment.store', $comment->post_id )}}" method="POST">
+                            @csrf
+                            <x-error field="comment"></x-error>
+                            <input type="text"  id="comment"class="form-control comment" name="comment" placeholder="Post a comment">
+                            <input id="Post" class="btn btn-primary " type="submit" value="Send">
+
+                            </form>
+                      
                     </div>
                 </div>
             </div>
         @endforeach
+    <div>
 
+    </div>
 
 
     </div>
@@ -91,4 +105,45 @@
 
         </div>
     </div>
+
+
+
 @endsection
+
+
+@section('comments')
+<x-script></x-script>
+                            <!-- <script>
+                                $(document).ready(function () {
+                                    $(document).on('click', '#Post', function (e) {
+                                        e.preventDefault();
+                                    var data = {
+                                        'comment': $('.comment').val() 
+                                    }
+                                    $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            }
+                                        });
+                                    $.ajax({
+                                        type: 'POST',
+                                        data : data,
+                                        url:"",
+                                        datatype: "Json",
+
+                                        success:function (response) {
+                                            
+                                        }
+                                    })
+                                    })
+                                });
+                            </script>         -->
+
+                            <script>
+
+                            $(document).ready(function () {
+                            });
+                             
+                           
+                            </script>
+        @endsection

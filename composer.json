@@ -12,6 +12,7 @@
         "laravel/breeze": "^1.7",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "patrickbussmann/oauth2-apple": "^0.2.6",
         "socialiteproviders/apple": "^5.0"

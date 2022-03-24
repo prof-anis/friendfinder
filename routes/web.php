@@ -5,7 +5,10 @@ use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\Authentication\ForgetpasswordController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\Socialite\SocialiteAuthController;
 use App\Http\Controllers\UserFollowerController;
+use App\Http\Controllers\Post\CommentController;
 use App\Http\Controllers\LogoutController;
 use App\Mail\ForgetPassMail;
 use Illuminate\Support\Facades\Route;
@@ -27,14 +30,16 @@ Route::group(['prefix' => 'auth'], function () {
    Route::post('register', RegisterController::class)->name('register');
    Route::post('login', LoginController::class)->name('login');
    Route::get('forgotpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
-   Route::Post('forgotpassword', [ForgetPasswordController::class, 'check'])->name('forgetpasswordCheck');
-   route::get('/resetpassword', [ResetPasswordController::class, 'index'])->name('ResetPassword');
-   route::PUT('/resetpassword', [ResetPasswordController::class, 'reset'])->name('Reset');
+   Route::post('forgotpassword', [ForgetPasswordController::class, 'check'])->name('forgetpasswordcheck');
+   Route::get('/resetpassword/{data}', [ResetPasswordController::class, 'index'])->name('resetpassword');
+   route::put('/resetpassword/{data}', [ResetPasswordController::class, 'reset'])->name('reset');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('dashboard', DashboardController::class)
+    Route::get('/{username}', DashboardController::class)
         ->name('dashboard');
+        Route::get('users/post', [ DataController::class , 'index'])
+        ->name('data');
     Route::get('people', [UserFollowerController::class, 'index'])
         ->name('people');
     Route::post('{user}/follow', [UserFollowerController::class, 'follow'])
@@ -42,9 +47,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('{user}/unfollow', [UserFollowerController::class, 'unfollow'])
         ->name('unfollow');
     Route::post('logout', LogoutController::class)->name('logout');
+    Route::post('{id}/comments', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('{id}/delete', [CommentController::class, 'destroy'])->name('comment.delete');
 });
 
-Route::get('/mail', function () {
-    return new ForgetPassMail;
-})->name('mail');
 
+// Social-lite Routes
+Route::get('auth/social/{provider}',  [SocialiteAuthController::class, 'get'])->name('socialite');
+
+Route::get('auth/social/{provider}/callback',  [SocialiteAuthController::class, 'save']);

@@ -185,6 +185,7 @@
                                 <div class="form-group" style="margin-top: 10px; display: block">
                                     <input type="submit" value="Register Now" class="btn btn-primary">
                                 </div>
+                            
                             </form><!--Register Now Form Ends-->
                             <p><a href="#">Already have an account?</a></p>
                         </div><!--Registration Form Contents Ends-->
@@ -211,10 +212,16 @@
                                     </div>
                                     <x-error field="password"></x-error>
                                 </div>
+                                <div class="form-group ">
+                                
+                                </div>
                                 <button class="btn btn-primary">Login Now</button>
                             </form><!--Login Form Ends-->
                             <p><a href="{{ route('forgetpassword') }}">Forgot Password?</a></p>
                         </div>
+                        <a href="{{ route('socialite', 'github') }}" class="btn btn-success" style="background-color:black">
+                                     GITHUB 
+                                    </a>
                     </div>
                 </div>
             </div>
