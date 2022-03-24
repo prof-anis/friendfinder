@@ -37,4 +37,9 @@ return [
         'private_key' => file_get_contents(base_path("customer.p8"))
     ],
 
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+         'redirect' => env('GITHUB_REDIRECT_URL'),
+    ],
 ];

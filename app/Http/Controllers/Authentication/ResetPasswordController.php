@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ResetPassword;
 use App\Http\Requests\ResetPasswordRequest;
-use Illuminate\support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
 class ResetPasswordController extends Controller
@@ -29,7 +29,7 @@ class ResetPasswordController extends Controller
 
          if(!$this->CheckToken($data) || !$this->CheckEmailAndPass($email, $data) )
          {
-            return redirect()->Route('forgetpassword')->with('wrongemail', 'Token has expired');
+            return redirect()->route('forgetpassword')->with('wrongemail', 'Token has expired');
          }
 
         User::where('email', $email)->first()->update([ 'password' => $request->input('password') ]);

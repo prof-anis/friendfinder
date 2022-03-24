@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Mail\UserMail;
+use App\Mail\Usermail;
 use Illuminate\Support\Facades\Mail;
 
 class NewUserListener
@@ -27,6 +27,6 @@ class NewUserListener
      */
     public function handle($event)
     {
-        Mail::to($event->user->email)->send(new UserMail);
+        Mail::to($event->user->email)->send(new Usermail);
     }
 }

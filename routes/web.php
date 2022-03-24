@@ -6,6 +6,7 @@ use App\Http\Controllers\Authentication\ForgetpasswordController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\Socialite\SocialiteAuthController;
 use App\Http\Controllers\UserFollowerController;
 use App\Http\Controllers\Post\CommentController;
 use App\Http\Controllers\LogoutController;
@@ -51,5 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-  
+// Social-lite Routes
+Route::get('auth/social/{provider}',  [SocialiteAuthController::class, 'get'])->name('socialite');
 
+Route::get('auth/social/{provider}/callback',  [SocialiteAuthController::class, 'save']);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Authentication;
 use App\Http\Requests\Auth\ForgetPasswordRequest;
 use Illuminate\Support\Facades\Mail;
 use  App\Mail\Forgetpasswordmail;
-use  App\jobs\ResetPasswordJob;
+use  App\Jobs\ResetPasswordJob;
 use App\Http\Controllers\Controller;
 use App\Models\ResetPassword;
 use Illuminate\Http\Request;
