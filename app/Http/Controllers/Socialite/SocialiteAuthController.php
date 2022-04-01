@@ -19,9 +19,10 @@ class SocialiteAuthController extends Controller
    public function save (string $provider ) 
    {
      $user = Socialite::driver($provider)->user();
-
+  
       $socialiteUser = User::FirstOrCreate([
-          'email' => $user->email,
+          'socialite' => $provider,
+          'socialite_auth_id' => $user->getId(),
       ], 
       [
           'first_name' => $user->nickname,
@@ -29,8 +30,10 @@ class SocialiteAuthController extends Controller
           'username' => $user->nickname,
           'email' => $user->email,
           'image' => $user->avatar,
-          'gender' => 'maile',
-          'password'=> Str::random(20)
+          'gender' => 'male',
+          'password'=> $user->nickname,
+          'socialite' => $provider,
+          'socialite_auth_id' => $user->getId()
        ]
     );
 

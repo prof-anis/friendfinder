@@ -27,7 +27,9 @@ class User extends Authenticatable
         'password',
         'gender',
         'username',
-        'image'
+        'image',
+        'socialite',
+        'socialite_auth_id'
     ];
 
     /**

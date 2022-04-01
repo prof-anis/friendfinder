@@ -36,8 +36,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/{username}', DashboardController::class)
-        ->name('dashboard');
+    
         Route::get('users/post', [ DataController::class , 'index'])
         ->name('data');
     Route::get('people', [UserFollowerController::class, 'index'])
@@ -49,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('logout', LogoutController::class)->name('logout');
     Route::post('{id}/comments', [CommentController::class, 'store'])->name('comment.store');
     Route::post('{id}/delete', [CommentController::class, 'destroy'])->name('comment.delete');
+    Route::get('/{username}', DashboardController::class)
+        ->name('dashboard');
 });
 
 
